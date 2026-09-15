@@ -1,0 +1,693 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* =========================================================
+   BUGSENSE AI — GLOBAL DESIGN SYSTEM
+   Developer Console / AI Diagnostics Interface
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   DARK THEME
+   --------------------------------------------------------- */
+
+:root {
+  --color-canvas: 6 8 18;
+  --color-surface: 13 17 30;
+  --color-overlay: 255 255 255;
+
+  --slate-50: 248 250 252;
+  --slate-100: 241 245 249;
+  --slate-200: 226 232 240;
+  --slate-300: 203 213 225;
+  --slate-400: 148 163 184;
+  --slate-500: 100 116 139;
+  --slate-600: 71 85 105;
+  --slate-700: 51 65 85;
+  --slate-800: 30 41 59;
+  --slate-900: 15 23 42;
+  --slate-950: 2 6 23;
+
+  --accent-primary: 124 92 255;
+  --accent-secondary: 34 211 238;
+  --accent-purple: 168 85 247;
+
+  --danger: 248 113 113;
+  --warning: 251 191 36;
+  --success: 52 211 153;
+
+  --panel-border: rgba(148, 163, 184, 0.1);
+  --panel-highlight: rgba(124, 92, 255, 0.08);
+}
+
+
+/* ---------------------------------------------------------
+   LIGHT THEME
+   --------------------------------------------------------- */
+
+.light {
+  --color-canvas: 245 247 252;
+  --color-surface: 255 255 255;
+  --color-overlay: 15 23 42;
+
+  --slate-50: 15 23 42;
+  --slate-100: 30 41 59;
+  --slate-200: 51 65 85;
+  --slate-300: 71 85 105;
+  --slate-400: 100 116 139;
+  --slate-500: 148 163 184;
+  --slate-600: 203 213 225;
+  --slate-700: 226 232 240;
+  --slate-800: 241 245 249;
+  --slate-900: 248 250 252;
+  --slate-950: 255 255 255;
+
+  --panel-border: rgba(15, 23, 42, 0.08);
+  --panel-highlight: rgba(124, 92, 255, 0.06);
+}
+
+
+/* =========================================================
+   BASE
+   ========================================================= */
+
+@layer base {
+
+  html {
+    @apply scroll-smooth;
+    background: rgb(var(--color-canvas));
+  }
+
+  body {
+    @apply text-slate-200 font-body antialiased transition-colors duration-200;
+    min-height: 100vh;
+
+    background-color: rgb(var(--color-canvas));
+
+    background-image:
+      radial-gradient(
+        circle at 10% 0%,
+        rgba(124, 92, 255, 0.16),
+        transparent 28%
+      ),
+      radial-gradient(
+        circle at 90% 5%,
+        rgba(34, 211, 238, 0.10),
+        transparent 26%
+      ),
+      radial-gradient(
+        circle at 50% 100%,
+        rgba(168, 85, 247, 0.08),
+        transparent 35%
+      );
+
+    background-attachment: fixed;
+  }
+
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+
+    background-image:
+      linear-gradient(
+        rgba(255, 255, 255, 0.018) 1px,
+        transparent 1px
+      ),
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.018) 1px,
+        transparent 1px
+      );
+
+    background-size: 42px 42px;
+
+    mask-image:
+      linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.8),
+        transparent 85%
+      );
+  }
+
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display text-slate-50;
+    letter-spacing: -0.015em;
+  }
+
+
+  ::selection {
+    background: rgba(124, 92, 255, 0.35);
+    color: white;
+  }
+
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color:
+      rgba(124, 92, 255, 0.55)
+      rgba(255, 255, 255, 0.03);
+  }
+
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+
+  *::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+
+  *::-webkit-scrollbar-thumb {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(124, 92, 255, 0.75),
+        rgba(34, 211, 238, 0.65)
+      );
+
+    border-radius: 999px;
+  }
+
+
+  *::-webkit-scrollbar-thumb:hover {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(139, 111, 255, 0.95),
+        rgba(34, 211, 238, 0.85)
+      );
+  }
+
+
+  *:focus-visible {
+    outline: none;
+
+    box-shadow:
+      0 0 0 2px rgb(var(--color-canvas)),
+      0 0 0 4px rgba(124, 92, 255, 0.75);
+  }
+
+}
+
+
+/* =========================================================
+   COMPONENT SYSTEM
+   ========================================================= */
+
+@layer components {
+
+
+  /* -------------------------------------------------------
+     PANEL
+     ------------------------------------------------------- */
+
+  .panel {
+    position: relative;
+
+    @apply rounded-2xl;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(19, 24, 42, 0.94),
+        rgba(10, 14, 27, 0.96)
+      );
+
+    border: 1px solid rgba(148, 163, 184, 0.10);
+
+    box-shadow:
+      0 18px 45px rgba(0, 0, 0, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+    backdrop-filter: blur(18px);
+
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+
+  .panel:hover {
+    border-color: rgba(124, 92, 255, 0.18);
+
+    box-shadow:
+      0 22px 55px rgba(0, 0, 0, 0.25),
+      0 0 0 1px rgba(124, 92, 255, 0.035);
+  }
+
+
+  .light .panel {
+    background:
+      linear-gradient(
+        145deg,
+        rgba(255, 255, 255, 0.96),
+        rgba(248, 250, 252, 0.98)
+      );
+
+    border-color: rgba(15, 23, 42, 0.08);
+
+    box-shadow:
+      0 15px 35px rgba(15, 23, 42, 0.08);
+  }
+
+
+  /* -------------------------------------------------------
+     INPUT
+     ------------------------------------------------------- */
+
+  .input-field {
+    @apply w-full rounded-xl px-4 py-3 text-sm text-slate-100 outline-none;
+
+    background:
+      rgba(4, 7, 16, 0.72);
+
+    border:
+      1px solid rgba(148, 163, 184, 0.13);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.02);
+
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
+  }
+
+
+  .input-field::placeholder {
+    color: rgb(var(--slate-500));
+  }
+
+
+  .input-field:hover {
+    border-color:
+      rgba(148, 163, 184, 0.22);
+  }
+
+
+  .input-field:focus {
+    background:
+      rgba(6, 10, 22, 0.95);
+
+    border-color:
+      rgba(124, 92, 255, 0.7);
+
+    box-shadow:
+      0 0 0 3px rgba(124, 92, 255, 0.10),
+      0 0 22px rgba(124, 92, 255, 0.06);
+  }
+
+
+  .light .input-field {
+    background:
+      rgba(248, 250, 252, 0.95);
+
+    border-color:
+      rgba(15, 23, 42, 0.11);
+  }
+
+
+  /* -------------------------------------------------------
+     LABEL
+     ------------------------------------------------------- */
+
+  .label {
+    @apply block text-xs font-semibold uppercase mb-2;
+
+    color: rgb(var(--slate-400));
+
+    letter-spacing: 0.11em;
+  }
+
+
+  /* -------------------------------------------------------
+     PRIMARY BUTTON
+     ------------------------------------------------------- */
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white;
+
+    background:
+      linear-gradient(
+        135deg,
+        rgb(124, 92, 255),
+        rgb(100, 75, 225)
+      );
+
+    border:
+      1px solid rgba(167, 139, 250, 0.28);
+
+    box-shadow:
+      0 8px 25px rgba(124, 92, 255, 0.22),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      filter 0.15s ease;
+  }
+
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+
+    filter: brightness(1.08);
+
+    box-shadow:
+      0 12px 32px rgba(124, 92, 255, 0.30);
+  }
+
+
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+
+
+  .btn-primary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+
+  /* -------------------------------------------------------
+     SECONDARY BUTTON
+     ------------------------------------------------------- */
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-slate-200;
+
+    background:
+      rgba(255, 255, 255, 0.035);
+
+    border:
+      1px solid rgba(148, 163, 184, 0.13);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      transform 0.15s ease;
+  }
+
+
+  .btn-secondary:hover {
+    background:
+      rgba(124, 92, 255, 0.075);
+
+    border-color:
+      rgba(124, 92, 255, 0.28);
+
+    transform:
+      translateY(-1px);
+  }
+
+
+  .btn-secondary:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+
+  /* -------------------------------------------------------
+     BADGES
+     ------------------------------------------------------- */
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+
+    backdrop-filter: blur(10px);
+  }
+
+
+  /* -------------------------------------------------------
+     AI GLOW CARD
+     ------------------------------------------------------- */
+
+  .ai-card {
+    position: relative;
+
+    border:
+      1px solid rgba(124, 92, 255, 0.22);
+
+    border-radius:
+      16px;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(124, 92, 255, 0.06),
+        rgba(34, 211, 238, 0.025)
+      );
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  }
+
+
+  .ai-card::before {
+    content: "";
+
+    position: absolute;
+
+    left: 20px;
+    right: 20px;
+    top: 0;
+
+    height: 1px;
+
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        rgba(124, 92, 255, 0.85),
+        rgba(34, 211, 238, 0.75),
+        transparent
+      );
+  }
+
+
+  /* -------------------------------------------------------
+     TERMINAL / CODE VIEW
+     ------------------------------------------------------- */
+
+  .terminal-panel {
+    @apply rounded-xl font-mono;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(4, 6, 13, 0.98),
+        rgba(8, 11, 21, 0.98)
+      );
+
+    border:
+      1px solid rgba(71, 85, 105, 0.25);
+
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.02);
+  }
+
+
+  /* -------------------------------------------------------
+     STATUS DOT
+     ------------------------------------------------------- */
+
+  .status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 999px;
+
+    background:
+      rgb(34, 211, 238);
+
+    box-shadow:
+      0 0 0 4px rgba(34, 211, 238, 0.09),
+      0 0 12px rgba(34, 211, 238, 0.75);
+  }
+
+
+  /* -------------------------------------------------------
+     METRIC CARD
+     ------------------------------------------------------- */
+
+  .metric-card {
+    position: relative;
+    overflow: hidden;
+
+    @apply rounded-2xl p-5;
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(17, 22, 38, 0.9),
+        rgba(10, 13, 25, 0.95)
+      );
+
+    border:
+      1px solid rgba(148, 163, 184, 0.09);
+
+    box-shadow:
+      0 12px 32px rgba(0, 0, 0, 0.16);
+  }
+
+
+  .metric-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: -40px;
+    top: -40px;
+
+    border-radius: 999px;
+
+    background:
+      radial-gradient(
+        circle,
+        rgba(124, 92, 255, 0.16),
+        transparent 70%
+      );
+  }
+
+
+  /* -------------------------------------------------------
+     GRADIENT TEXT
+     ------------------------------------------------------- */
+
+  .gradient-text {
+    background:
+      linear-gradient(
+        90deg,
+        rgb(167, 139, 250),
+        rgb(34, 211, 238)
+      );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+  }
+
+
+  /* -------------------------------------------------------
+     SMALL SECTION HEADING
+     ------------------------------------------------------- */
+
+  .section-eyebrow {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+
+    letter-spacing: 0.18em;
+
+    color:
+      rgb(139, 111, 255);
+  }
+
+
+  /* -------------------------------------------------------
+     DIVIDER
+     ------------------------------------------------------- */
+
+  .soft-divider {
+    height: 1px;
+
+    background:
+      linear-gradient(
+        90deg,
+        transparent,
+        rgba(148, 163, 184, 0.15),
+        transparent
+      );
+  }
+
+
+  /* -------------------------------------------------------
+     GLASS CHIP
+     ------------------------------------------------------- */
+
+  .glass-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    padding:
+      6px 10px;
+
+    border-radius:
+      999px;
+
+    font-size:
+      11px;
+
+    font-weight:
+      600;
+
+    color:
+      rgb(var(--slate-300));
+
+    background:
+      rgba(255, 255, 255, 0.035);
+
+    border:
+      1px solid rgba(148, 163, 184, 0.10);
+  }
+
+
+  /* -------------------------------------------------------
+     AGENT CARD
+     ------------------------------------------------------- */
+
+  .agent-card {
+    position: relative;
+
+    padding:
+      16px;
+
+    border-radius:
+      14px;
+
+    background:
+      rgba(3, 6, 15, 0.45);
+
+    border:
+      1px solid rgba(148, 163, 184, 0.08);
+
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+
+  .agent-card:hover {
+    background:
+      rgba(124, 92, 255, 0.04);
+
+    border-color:
+      rgba(124, 92, 255, 0.18);
+  }
+
+}

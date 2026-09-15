@@ -1,0 +1,15 @@
+# Optional semantic-embedding upgrade path for the Duplicate Detection Agent.
+#
+#   pip install -r requirements.txt
+#   pip install -r requirements-semantic.txt   # this file, only if you want it
+#
+# Kept separate from requirements.txt on purpose: these pull in torch, which
+# is a multi-gigabyte download, and sentence-transformers needs outbound
+# internet access to huggingface.co the first time a model is used. Skipping
+# this file entirely is safe and fully supported — the Duplicate Detection
+# Agent detects their absence automatically and falls back to TF-IDF +
+# cosine similarity (scikit-learn, already in requirements.txt). That
+# fallback path is the one verified end-to-end in this project's own test
+# environment and in the Docker image.
+sentence-transformers==3.1.1
+faiss-cpu==1.9.0

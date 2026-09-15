@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "title": "Database connection pool exhaustion",
+    "category": "Backend",
+    "module": null,
+    "language": "Python",
+    "severity": "Medium",
+    "status": "Resolved",
+    "resolution_notes": "Root cause: Unclosed sessions in background tasks.\n\nFix: Use context manager with get_db to guarantee session close."
+  },
+  {
+    "id": 3,
+    "title": "Dashboard chart flickers on resize",
+    "category": "Frontend",
+    "module": null,
+    "language": null,
+    "severity": "Low",
+    "status": "Resolved",
+    "resolution_notes": "Fixed and verified in staging before release."
+  },
+  {
+    "id": 4,
+    "title": "Duplicate bug entries after retry",
+    "category": "Database",
+    "module": null,
+    "language": null,
+    "severity": "Medium",
+    "status": "Resolved",
+    "resolution_notes": "Fixed and verified in staging before release."
+  },
+  {
+    "id": 5,
+    "title": "Analytics summary slow with 10k+ bugs",
+    "category": "Backend",
+    "module": null,
+    "language": null,
+    "severity": "Medium",
+    "status": "Resolved",
+    "resolution_notes": "Fixed and verified in staging before release."
+  },
+  {
+    "id": 6,
+    "title": "Stack trace field not saving newlines",
+    "category": "Database",
+    "module": null,
+    "language": null,
+    "severity": "Low",
+    "status": "Closed",
+    "resolution_notes": "Fixed and verified in staging before release."
+  },
+  {
+    "id": 7,
+    "title": "Session expires without warning",
+    "category": "Frontend",
+    "module": null,
+    "language": null,
+    "severity": "Medium",
+    "status": "Closed",
+    "resolution_notes": "Fixed and verified in staging before release."
+  },
+  {
+    "id": 9,
+    "title": "CORS error on staging environment",
+    "category": "Infra",
+    "module": null,
+    "language": null,
+    "severity": "Critical",
+    "status": "Resolved",
+    "resolution_notes": "Fixed and verified in staging before release."
+  },
+  {
+    "id": 2,
+    "title": "Java defect",
+    "category": null,
+    "module": null,
+    "language": "Java",
+    "severity": "Medium",
+    "status": "Resolved",
+    "resolution_notes": "Root cause: x\n\nFix: y"
+  }
+]
